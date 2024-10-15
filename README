@@ -1,0 +1,33 @@
+# Que Cocino Hoy?
+
+**Que Cocino Hoy?** es una aplicación innovadora que ayuda a los usuarios a generar recetas basadas en los ingredientes que tienen en su nevera. Utiliza inteligencia artificial, conectada a través de la API de ChatGPT, para sugerir recetas de forma rápida y sencilla.
+
+## Características principales
+
+- **Ingreso de ingredientes**: Los usuarios pueden ingresar los ingredientes que tienen disponibles.
+- **Generación de recetas**: La app se conecta a ChatGPT mediante una API para sugerir recetas utilizando los ingredientes ingresados.
+- **Guardar recetas favoritas**: Los usuarios pueden guardar sus recetas favoritas para acceder a ellas más tarde.
+- **Compartir recetas**: Comparte recetas en redes sociales para que tus amigos también las prueben.
+
+## Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/que-cocino-hoy.git
+   ```
+2. Navega al directorio del proyecto:
+   ```bash
+   cd que-cocino-hoy
+   ```
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+## Uso
+
+1. Inicia la aplicación:
+   ```bash
+   npm start
+   ```
+2. Abre tu navegador y visita `http://localhost:3000` para comenzar a usar la aplicación.
