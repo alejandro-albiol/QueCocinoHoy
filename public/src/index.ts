@@ -4,12 +4,18 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // Usar variable de entorno para el puerto
 
 app.use(express.static('public'));
 
+// Middleware para manejo de errores
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 app.get('/', (req, res) => {
-  res.send('Hello, World!');
+  res.sendFile('index.html', { root: 'public' });
 });
 
 app.listen(port, () => {
