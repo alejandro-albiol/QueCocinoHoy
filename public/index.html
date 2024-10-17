@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Que Cocino Hoy?</title>
-    <link rel="stylesheet" href="../public/styles.css">
-    <script src="../build/main.js"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script type="module" src="/build/main.js"></script>
+  </head>
+  <body>
     <header>
-        <h1>Que Cocino Hoy?</h1>
-        <p>Genera recetas deliciosas con los ingredientes que tienes a mano.</p>
+      <h1>Que Cocino Hoy?</h1>
+      <p>Genera recetas deliciosas con los ingredientes que tienes a mano.</p>
     </header>
 
     <main>
-        <section id="ingredient-input">
-            <h2>Ingresa tus ingredientes</h2>
-            <form id="ingredient-form">
-                <input type="text" id="ingredients" placeholder="Ej. tomate, pollo, arroz" required>
-                <button type="submit">Generar Receta</button>
-            </form>
-        </section>
+      <section id="ingredient-input">
+        <h2>Ingresa tus ingredientes</h2>
+        <form id="ingredient-form">
+          <input
+            type="text"
+            id="ingredients"
+            placeholder="Ej. tomate, pollo, arroz"
+            required
+          />
+          <button type="submit">Generar Receta</button>
+        </form>
+      </section>
 
-        <section id="recipe-output">
-            <h2>Receta Sugerida</h2>
-            <div id="recipe">
-                <!-- Aquí se mostrará la receta generada -->
-            </div>
-        </section>
+      <section id="recipe-output">
+        <h2>Receta Sugerida</h2>
+        <div id="recipe">
+          <!-- Aquí se mostrará la receta generada -->
+        </div>
+      </section>
 
-        <section id="favorites">
-            <h2>Recetas Favoritas</h2>
-            <ul id="favorite-recipes">
-                <!-- Aquí se listarán las recetas guardadas como favoritas -->
-            </ul>
-        </section>
+      <section id="favorites">
+        <h2>Recetas Favoritas</h2>
+        <ul id="favorite-recipes">
+          <!-- Aquí se listarán las recetas guardadas como favoritas -->
+        </ul>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 Que Cocino Hoy? - Todos los derechos reservados.</p>
+      <p>&copy; 2023 Que Cocino Hoy? - Todos los derechos reservados.</p>
     </footer>
-</body>
+  </body>
 </html>
-
