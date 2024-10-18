@@ -1,48 +1,47 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import 'dotenv/config.js';
-import { Request, Response, NextFunction } from 'express';
-import { RecipeGenerator } from './recipeGenerator.js';
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { RecipeGenerator } from "./recipeGenerator.js";
+import { AvailableIngredients } from "./AvailableIngredients.js";
+import fs from 'fs';
 
 const app = express();
+const port = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const publicPath = path.join(__dirname, "../public");
 
-// Configura el directorio de archivos estáticos
-const publicDir = path.join(__dirname, '../public');
-const buildDir = path.join(__dirname, '../build');
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(publicDir));
-app.use('/build', express.static(buildDir));
-
-// Ruta para servir el archivo index.html
-app.get('/', (req: Request, res: Response) => {
-    res.sendFile(path.join(publicDir, 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
-// Configura el tipo MIME correcto para archivos JavaScript
-app.use((req: Request, res: Response, next: NextFunction) => {
-    if (req.url.endsWith('.js')) {
-        res.type('application/javascript');
-    }
-    next();
+app.post("/generate-recipe", async (req, res) => {  
+  const ingredientsList = req.body.ingredients.split(',').map((ingredient: string) => ingredient.trim());
+  const apiKey = process.env.GROQ_API_KEY as string;
+  const ingredients = new AvailableIngredients(ingredientsList.join(', '));
+  const recipeGenerator = new RecipeGenerator(apiKey, ingredients);
+
+  try {
+    const recipes = await recipeGenerator.generateRecipe();
+    let recipesHtml = '';
+    recipes.forEach((recipe: { title: string, description: string }) => {
+      recipesHtml += `<li><h2>${recipe.title}</h2><p>${recipe.description}</p></li>`;
+    });
+
+    const recipesPagePath = path.join(publicPath, "recipes.html");
+    let recipesPage = await fs.promises.readFile(recipesPagePath, "utf-8");
+    recipesPage = recipesPage.replace('<!-- Los elementos de la lista se llenarán dinámicamente -->', recipesHtml);
+
+    res.send(recipesPage);
+  } catch (error) {
+    console.error("Error generating recipe:", error);
+    res.status(500).send("Error generating recipe");
+  }
 });
 
-const recipeGenerator = new RecipeGenerator(process.env.OPENAI_API_KEY || '');
-
-app.post('/generate-recipes', express.json(), async (req: Request, res: Response) => {
-    const { ingredients } = req.body;
-    try {
-        const recipes = await recipeGenerator.generateRecipe(ingredients);
-        res.json({ recipes });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to generate recipes' });
-    }
-});
-
-// Inicia el servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

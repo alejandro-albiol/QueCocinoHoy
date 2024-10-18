@@ -1,30 +1,47 @@
-import { OpenAI } from "openai";
+import { AvailableIngredients } from "./AvailableIngredients.js";
+import { getGroqChatCompletion } from "./groqApi.js";
 
 export class RecipeGenerator {
-    private openai: OpenAI;
 
-    constructor(apiKey: string) {
-        this.openai = new OpenAI({ apiKey: apiKey });
+    #apiKey: string;
+    #ingredients: AvailableIngredients;
+
+    constructor(apiKey: string, ingredients: AvailableIngredients) {
+        this.#apiKey = apiKey;
+        this.#ingredients = ingredients;
     }
 
-    async generateRecipe(ingredients: string): Promise<string[]> {
-        const response = await this.openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "system",
-                    content: "You are a helpful assistant that generates recipes based on available ingredients."
-                },
-                {
-                    role: "user",
-                    content: `Generate three recipes using the following ingredients: ${ingredients}. Each recipe should include a name, list of ingredients, and steps. Provide the recipes as an array of strings.`
-                }
-            ],
-            temperature: 0.7,
-            max_tokens: 1000,
-        });
-
-        const content = response.choices?.[0]?.message?.content?.trim() ?? '';
-        return content ? JSON.parse(content) : [];
+    get apiKey() {
+        return this.#apiKey;
     }
+
+    get ingredients() {
+        return this.#ingredients;
+    }
+
+    async generateRecipe() {
+        // Log the ingredients to see what is being sent
+        console.log("Ingredients input:", this.#ingredients.ingredients);
+
+        const chatCompletion = await getGroqChatCompletion(this.#ingredients.ingredients);
+        const recipesJson = chatCompletion.choices[0]?.message?.content || "[]";
+        
+        // Log the JSON string to inspect it
+        console.log("Received JSON string:", recipesJson);
+        
+        try {
+            // Attempt to parse the JSON directly
+            const parsedRecipes = JSON.parse(recipesJson);
+            
+            if (!Array.isArray(parsedRecipes)) {
+                throw new Error("Parsed JSON is not an array");
+            }
+            
+            return parsedRecipes;
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+            throw error;
+        }
+    }
+
 }
