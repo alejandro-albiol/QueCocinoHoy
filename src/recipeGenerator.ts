@@ -20,17 +20,14 @@ export class RecipeGenerator {
     }
 
     async generateRecipe() {
-        // Log the ingredients to see what is being sent
         console.log("Ingredients input:", this.#ingredients.ingredients);
 
         const chatCompletion = await getGroqChatCompletion(this.#ingredients.ingredients);
         const recipesJson = chatCompletion.choices[0]?.message?.content || "[]";
         
-        // Log the JSON string to inspect it
         console.log("Received JSON string:", recipesJson);
         
         try {
-            // Attempt to parse the JSON directly
             const parsedRecipes = JSON.parse(recipesJson);
             
             if (!Array.isArray(parsedRecipes)) {

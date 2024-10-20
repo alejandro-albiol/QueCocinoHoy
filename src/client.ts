@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const recipes = await response.json();
             if (recipesList) {
-                recipesList.innerHTML = ""; // Clear existing recipes
+                recipesList.innerHTML = "";
                 recipes.forEach((recipe: { title: string, description: string }) => {
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `<h2>${recipe.title}</h2><p>${recipe.description}</p>`;

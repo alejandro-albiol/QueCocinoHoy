@@ -8,12 +8,10 @@ export async function main() {
   const ingredients = process.argv.slice(2).join(", ");
   const chatCompletion = await getGroqChatCompletion(ingredients);
   
-  // Directly use the JSON string from the API response
   const rawJson = chatCompletion.choices[0]?.message?.content || "";
   console.log("Received JSON string:", rawJson);
 
   try {
-    // Attempt to parse the JSON string as is
     const recipes = JSON.parse(rawJson);
     console.log("Parsed recipes:", recipes);
   } catch (error) {
@@ -32,4 +30,3 @@ export async function getGroqChatCompletion(ingredients: string) {
     model: "llama3-8b-8192",
   });
 }
-  
