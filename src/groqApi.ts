@@ -9,13 +9,13 @@ export async function main() {
   const chatCompletion = await getGroqChatCompletion(ingredients);
   
   const rawJson = chatCompletion.choices[0]?.message?.content || "";
-  console.log("Received JSON string:", rawJson);
 
   try {
     const recipes = JSON.parse(rawJson);
-    console.log("Parsed recipes:", recipes);
+    return recipes;
   } catch (error) {
-    console.error("Error parsing JSON:", error);
+    console.error("Error parsing Groq API response:", error);
+    throw new Error("Failed to parse recipe data from AI response");
   }
 }
 
@@ -24,7 +24,13 @@ export async function getGroqChatCompletion(ingredients: string) {
     messages: [
       {
         role: "user",
-        content: `Send only three recipes easy to cook and tasty that contain the following ingredients: ${ingredients}. Return the recipes in JSON format with fields 'title', 'description'. Send only the JSON, without any other text or markup. In title use the name of the recipe, in description explain how to cook it.`,
+        content: `
+          Send only three recipes easy to cook and tasty that contain the following ingredients: ${ingredients}.
+          Return the recipes in JSON format with fields 'title', 'description'.
+          Send only the JSON, without any other text or markup.
+          In title use the name of the recipe, in description explain how to cook it.
+          Always respond in English, regardless of the input ingredients language.
+        `,
       },
     ],
     model: "llama3-8b-8192",
