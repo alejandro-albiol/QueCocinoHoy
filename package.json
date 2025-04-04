@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
-    "dev": "nodemon --exec 'npm run build && npm start' --ext ts"
+    "dev": "nodemon --exec \"npm run build && npm start\" --ext ts"
   },
   "author": "",
   "license": "ISC",
