@@ -9,5 +9,6 @@
      "strict": true,
      "moduleResolution": "node",
     },
-    "type": "module"
+    "type": "module",
+    "include": ["src/**/*"]
 }

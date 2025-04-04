@@ -4,7 +4,9 @@
   "description": "Que Cocino Hoy?",
   "main": "build/index.js",
   "scripts": {
-    "start": "tsc && nodemon build/index.js"
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "nodemon --exec 'npm run build && npm start' --ext ts"
   },
   "author": "",
   "license": "ISC",
