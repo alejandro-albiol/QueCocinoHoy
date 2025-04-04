@@ -33,12 +33,17 @@ app.post("/generate-recipe", async (req, res) => {
 
     const recipesPagePath = path.join(publicPath, "recipes.html");
     let recipesPage = await fs.promises.readFile(recipesPagePath, "utf-8");
-    recipesPage = recipesPage.replace('<!-- Los elementos de la lista se llenarán dinámicamente -->', recipesHtml);
+    recipesPage = recipesPage.replace('<!-- Recipes will be loaded here -->', recipesHtml);
 
     res.send(recipesPage);
   } catch (error) {
     console.error("Error generating recipe:", error);
-    res.status(500).send("Error generating recipe");
+
+    if (error instanceof SyntaxError) {
+      res.status(502).send("Invalid response from the recipe service. Please refresh the page and try again.");
+    } else {
+      res.status(500).send("Error generating recipe. Please try again later.");
+    }
   }
 });
 

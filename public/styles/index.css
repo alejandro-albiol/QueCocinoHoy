@@ -1,52 +1,124 @@
+/* Modern CSS with variables and enhanced styling */
+:root {
+  --primary-color: #D23D2D;
+  --secondary-color: #31603D;
+  --background-color: #F8EECB;
+  --text-color: #333;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --border-radius: 15px;
+  --container-width: 800px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    background-color: #F8EECB; 
-    color: #D23D2D; 
-  }
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+h1, h2, .title {
+  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#ingredients {
+  padding: 1rem;
+  width: 100%;
+  max-width: 400px;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  background-color: white;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+#ingredients:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(49, 96, 61, 0.2);
+}
+
+button {
+  padding: 1rem 2rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
   
-  
-  header {
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
-  
-  h1, h2, title{
-    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
-    color: #D23D2D; 
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
   }
 
   #ingredients {
-    padding: 10px;
-    width: 300px;
-    font-size: 16px;
-    border: none; 
-    border-radius: 15px; 
-    background-color: #fff; 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); 
-    outline: none;
+    width: 90%;
+    max-width: none;
   }
-  
+
   button {
-    padding: 10px 20px;
-    background-color: #31603D;
-    border-radius: 15px; 
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
   }
-  
-  footer {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #D23D2D;
-  }
+}

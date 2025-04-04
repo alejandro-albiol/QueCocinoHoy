@@ -1,83 +1,144 @@
-body {
-  font-family: Arial, sans-serif;
+/* Heredamos las variables del tema principal */
+:root {
+  --primary-color: #D23D2D;
+  --secondary-color: #31603D;
+  --background-color: #F8EECB;
+  --text-color: #333;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --border-radius: 15px;
+  --container-width: 800px;
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: left;
-  background-color: #F8EECB; 
-  color: #D23D2D; 
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  line-height: 1.6;
+}
+
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Navigation styles */
+.navigation {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: var(--transition);
+  font-size: 1.1rem;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+/* Header styles */
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 
 h1 {
+  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+/* Recipes styles */
+#recipes {
+  width: 100%;
+  max-width: 600px;
+}
+
+.recipes-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Individual recipe styles */
+.recipes-grid li {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  padding: 2rem;
+  width: 100%;
+}
+
+.recipes-grid li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recipes-grid h2 {
   font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
-  color: #D23D2D;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-h2 {
-  font-size: 25px;
-  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
-  color: #D23D2D;
+.recipes-grid p {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-p {
-  font-size: 20px;
-  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
-  color: #6E433D;
+/* Footer styles */
+footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+  text-align: center;
 }
 
-li {
-  margin-left: 10px;
-}
-
+/* Responsive design */
 @media (max-width: 768px) {
-  body {
-    padding: 10px;
+  .container {
+    padding: 1rem;
   }
-
-  h1 {
-    font-size: 35px; 
-    text-align: center;
-  }
-
-  h2 {
-    font-size: 20px; 
-  }
-
-  p {
-    font-size: 16px; 
-  }
-
-  li {
-    margin-left: 5px; 
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 28px; 
-  }
-
-  h2 {
-    font-size: 18px; 
-  }
-
-  p {
-    font-size: 14px; 
-  }
-
-  li {
-    margin-left: 0px; 
-  }
-}
-
   
+  .recipes-grid li {
+    padding: 1.5rem;
+  }
+}

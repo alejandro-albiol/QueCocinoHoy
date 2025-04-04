@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/recipes.css">
-    <title>Recipes</title> <!-- Asegúrate de que la ruta sea correcta -->
+    <title>Your Recipes - ¿Qué cocino hoy?</title>
 </head>
 <body>
-    <h1>Recipes</h1>
-    <ul id="recipes">
-        <!-- Los elementos de la lista se llenarán dinámicamente -->
-    </ul>
+    <div class="container">
+        <header>
+            <nav class="navigation">
+                <a href="/" class="back-button" aria-label="Back to home">
+                    Back to home
+                </a>
+            </nav>
+            <h1>Your Recipes</h1>
+            <p class="subtitle">Here are your personalized recipes based on your ingredients!</p>
+        </header>
+
+        <main>
+            <div id="recipes" class="recipes-grid">
+                <!-- Recipes will be loaded here -->
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by <strong>Groq AI</strong></p>
+        </footer>
+    </div>
 </body>
 </html>

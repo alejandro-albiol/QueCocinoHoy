@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles/index.css">
-  <title>Recipe Generator</title>
-</head>
-<body>
-  <h1>Recipe Generator</h1>
-  <form action="/generate-recipe" method="post">
-    <p>
-      <label for="ingredients">Ingredients</label>
-      <input name="ingredients" type="text" id="ingredients" placeholder="Ex. tomato, chicken, rice" required />
-    </p>
-    <p>
-      <button type="submit">Generate Recipe</button>
-    </p>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <title>¿Qué cocino hoy?</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>¿Qué cocino hoy?</h1>
+        <p class="subtitle">
+          Tell me what ingredients you have, and I'll suggest recipes!
+        </p>
+      </header>
+
+      <main>
+        <form action="/generate-recipe" method="post">
+          <div class="input-group">
+            <label for="ingredients">Your ingredients:</label>
+            <input
+              name="ingredients"
+              type="text"
+              id="ingredients"
+              placeholder="Ex: tomato, chicken, rice"
+              required
+            />
+          </div>
+          <button type="submit">Generate Recipes</button>
+        </form>
+      </main>
+
+      <footer>
+        <p>Powered by Groq AI</p>
+      </footer>
+    </div>
+  </body>
 </html>
