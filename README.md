@@ -6,8 +6,6 @@
 
 - **Ingredient Input**: Users can enter the ingredients they have available.
 - **Recipe Generation**: The app connects to Groq through an API to suggest recipes using the entered ingredients.
-- **Save Favorite Recipes**: Users can save their favorite recipes to access them later.
-- **Share Recipes**: Share recipes on social media so your friends can try them too.
 
 ## Installation
 
